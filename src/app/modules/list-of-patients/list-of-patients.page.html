@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="patientsList$ | async; let patients; else skeleton">
-    <ion-item *ngFor="let item of patients"
+  <ion-virtual-scroll *ngIf="patientsList$ | async; let patients; else skeleton" [items]="patients">
+    <ion-item *virtualItem="let item"
               class="patient-item"
               [routerLink]="'details/'+item.id">
 
@@ -57,7 +57,7 @@
       </ion-grid>
 
     </ion-item>
-  </div>
+  </ion-virtual-scroll>
 
   <ng-template #skeleton>Loading  Data...</ng-template>
 </ion-content>
