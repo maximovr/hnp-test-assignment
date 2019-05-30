@@ -1,3 +1,4 @@
+<!-- TODO: Split it on smaller components and add skeleton cards on loading -->
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -8,8 +9,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-virtual-scroll [items]="patientsList$ | async">
-    <ion-item *virtualItem="let item"
+  <div *ngIf="patientsList$ | async; let patients; else skeleton">
+    <ion-item *ngFor="let item of patients"
               class="patient-item"
               [routerLink]="'details/'+item.id">
 
@@ -56,5 +57,7 @@
       </ion-grid>
 
     </ion-item>
-  </ion-virtual-scroll>
+  </div>
+
+  <ng-template #skeleton>Loading  Data...</ng-template>
 </ion-content>
