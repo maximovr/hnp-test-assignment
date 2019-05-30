@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header><h2>Welcome to patient app!</h2></ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <a [routerLink]="'/add-new-patient'" class="item-link">
+              <ion-icon name="md-person-add"></ion-icon>
+              <p>Add new patient</p>
+            </a>
+          </ion-col>
+          <ion-col size="6">
+            <a [routerLink]="'/list-of-patients'" class="item-link">
+              <ion-icon name="md-people"></ion-icon>
+              <p>List of patients</p>
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

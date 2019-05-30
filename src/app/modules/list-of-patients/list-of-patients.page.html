@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>List of patients</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-virtual-scroll [items]="patientsList$ | async">
+    <ion-item *virtualItem="let item">
+      {{ item.firstName }} {{ item.lastName }}
+      {{ item.registeredDate }}
+      {{ getDoctor(item.doctor) }}
+      <ion-item *ngFor="let address of item.addresses">
+        {{address.phone}}
+        {{address.email}}
+        {{address.street}}, {{address.city}}, {{address.zipcode}}, {{address.country}}
+      </ion-item>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
