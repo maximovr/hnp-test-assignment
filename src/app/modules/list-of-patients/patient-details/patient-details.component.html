@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="list-of-patients"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="patient$ | async; let patient;">
+      {{patient.firstName + ' ' + patient.lastName}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  import add user layout here
+</ion-content>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IDoctor, IPatient } from '../../shared/interfaces';
-import { patients, doctors } from '../../shared/data/simulation';
+import { patients, doctors } from '../../data/simulation';
 import { from, Observable }  from 'rxjs';
+import { DataService }       from '../../services/data.service';
 
 @Component({
   selector   : 'app-list-of-patients',
@@ -10,11 +11,14 @@ import { from, Observable }  from 'rxjs';
   styleUrls  : ['./list-of-patients.page.scss']
 })
 export class ListOfPatientsPage implements OnInit {
-  public patientsList$: Observable<IPatient[]> = from<IPatient[][]>([patients]);
+  public patientsList$: Observable<IPatient[]>;
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.patientsList$.subscribe((x) => console.log(x));
+    this.patientsList$ = this.dataService.getAllPatients();
   }
+
 
   getDoctor(docId): IDoctor | Object {
     const doctor: IDoctor | undefined = doctors.filter((doc) => doc.id === docId)[0];

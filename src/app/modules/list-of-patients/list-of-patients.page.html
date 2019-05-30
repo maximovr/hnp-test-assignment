@@ -9,15 +9,52 @@
 
 <ion-content>
   <ion-virtual-scroll [items]="patientsList$ | async">
-    <ion-item *virtualItem="let item">
-      {{ item.firstName }} {{ item.lastName }}
-      {{ item.registeredDate }}
-      {{ getDoctor(item.doctor) }}
-      <ion-item *ngFor="let address of item.addresses">
-        {{address.phone}}
-        {{address.email}}
-        {{address.street}}, {{address.city}}, {{address.zipcode}}, {{address.country}}
-      </ion-item>
+    <ion-item *virtualItem="let item"
+              class="patient-item"
+              [routerLink]="'details/'+item.id">
+
+      <span class="registration-date">
+        Registration {{item.registeredDate | dateToLocale}}
+      </span>
+
+      <ion-grid class="patient-and-doctor">
+        <ion-row>
+          <ion-col size="6">
+            <label class="mute">Patient</label>
+            <h6 class="item-data">{{ item.firstName + ' ' + item.lastName }}</h6>
+          </ion-col>
+          <ion-col size="6">
+            <label class="mute">Doctor</label>
+            <h6 class="item-data">{{ getDoctor(item.doctor) }}</h6>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <label class="mute">Addresses:</label>
+            <ion-grid class="address" *ngFor="let address of item.addresses">
+              <ion-row>
+                <ion-col size="6">
+                  <label class="mute">Phone</label>
+                  <p>{{address.phone}}</p>
+                </ion-col>
+                <ion-col size="6">
+                  <label class="mute">Email</label>
+                  <p>{{address.email}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <label class="mute">Address</label>
+                  <p>{{address.street}}, {{address.city}}, {{address.zipcode}}
+                                       , {{address.country}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-item>
   </ion-virtual-scroll>
 </ion-content>

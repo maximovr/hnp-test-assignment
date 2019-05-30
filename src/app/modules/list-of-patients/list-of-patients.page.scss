@@ -1,0 +1,54 @@
+.patient-item {
+  padding    : 8px;
+  background: #caebf3;
+
+  > a {
+    padding-left: 0;
+  }
+
+  label {
+    font-size   : 13px;
+    font-weight : 500;
+  }
+
+  .mute {
+    color : #31a5b3;
+  }
+
+  ion-grid.patient-and-doctor {
+    margin-top : 22px;
+  }
+
+  .item-data {
+    width  : 100%;
+    margin : 0;
+  }
+
+  .registration-date {
+    font-size  : 12px;
+    text-align : right;
+    position   : absolute;
+    right      : 0;
+    top        : 0;
+    background : #caebf3;
+    padding    : 4px 4px 4px 5px;
+    color      : #a0a0a0;
+    width: 75%;
+    border-bottom-left-radius: 8px;
+  }
+
+  .divider {
+    min-height : 0;
+    margin     : 4px 0;
+  }
+
+  .address {
+    padding-top : 8px;
+
+    p {
+      margin    : 0 0 5px 0;
+      font-size : 12px;
+    }
+  }
+
+}
