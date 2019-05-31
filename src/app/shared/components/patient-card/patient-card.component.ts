@@ -4,21 +4,21 @@ import {
   Input,
   OnInit,
   Output
-}                           from '@angular/core';
+}                             from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormGroup,
   Validators
-} from '@angular/forms';
-import { AlertController }  from '@ionic/angular';
-import { from, Observable } from 'rxjs';
-import moment               from 'moment';
+}                             from '@angular/forms';
+import { AlertController }    from '@ionic/angular';
+import { from }   from 'rxjs';
+import moment                 from 'moment';
 import numbertoWordsConverter from 'number-to-words';
 
-import { DataService }       from '../../../services/data.service';
-import { IDoctor, IPatient } from '../../interfaces';
-import { map }               from 'rxjs/operators';
+import { DataService }                 from '../../../services/data.service';
+import { IAddress, IDoctor, IPatient } from '../../interfaces';
+import { map }                         from 'rxjs/operators';
 
 @Component({
   selector   : 'app-patient-card',
@@ -30,20 +30,15 @@ export class PatientCardComponent implements OnInit {
   @Input() public patient: IPatient | any = {};
   @Output() public formEmitter: EventEmitter<any> = new EventEmitter<any>();
 
-  public doctors$: Observable<IDoctor[]> = this.dataService.getAllDoctors().pipe(
-    map((doctors: IDoctor[]) => doctors.map((doctor: IDoctor) => {
-      doctor.fullName = `${doctor.firstName} ${doctor.lastName}`;
-      return doctor;
-    }))
-  );
-  public patientForm: FormGroup          = this.fb.group({
-    firstName: [{value: this.patient.firstName, disabled: this.isEditable}, Validators.required],
-    lastName : ['', Validators.required],
-    birthDate: ['', Validators.required],
-    vat      : [''],
-    doctor   : ['', Validators.required],
-    addresses: this.fb.array([this.addAdress()])
-  });
+  public doctors: IDoctor[];
+  public patientForm: FormGroup;
+  public addressTypes: any = [
+    {name: 'Home', value: 'HOME'},
+    {name: 'Second home', value: 'SECOND_HOME'},
+    {name: 'Work', value: 'WORK'},
+    {name: 'Holiday place', value: 'HOLIDAY'},
+    {name: 'Close relative', value: 'RELATIVE'},
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -53,15 +48,14 @@ export class PatientCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    const vatControl = this.patientForm.get('vat');
-    this.patientForm.get('birthDate').valueChanges.subscribe((date) => {
-      if (!this.vatValidator(date)) {
-        console.log('add');
-        vatControl.setValidators([Validators.required]);
-      } else {
-        vatControl.clearValidators();
-      }
-      vatControl.updateValueAndValidity();
+    this.dataService.getAllDoctors().pipe(
+      map((doctors: IDoctor[]) => doctors.map((doctor: IDoctor) => {
+        doctor.fullName = `${doctor.firstName} ${doctor.lastName}`;
+        return doctor;
+      }))
+    ).subscribe((doctors) => {
+      this.doctors = doctors;
+      this.initPatientForm(this.patient);
     });
   }
 
@@ -84,22 +78,51 @@ export class PatientCardComponent implements OnInit {
     return numbertoWordsConverter.toWordsOrdinal(++n);
   }
 
-  public addOneMoreAddress() {
-    (this.patientForm.controls['addresses'] as FormArray).push(this.addAdress());
+  public addOneMoreAddress(address?: IAddress) {
+    (this.patientForm.controls['addresses'] as FormArray).push(this.addAdress(address));
   }
 
   public removeAddress(idx) {
     (this.patientForm.controls['addresses'] as FormArray).removeAt(idx);
   }
 
-  private addAdress() {
+  private initPatientForm(patient: IPatient | any = {}) {
+    this.patientForm = this.fb.group({
+      firstName: [patient.firstName, Validators.required],
+      lastName : [patient.lastName, Validators.required],
+      birthDate: [patient.birthDate, Validators.required],
+      vat      : [patient.vat],
+      doctor   : [this.doctors[patient.doctor], Validators.required],
+      addresses: this.fb.array([])
+    });
+
+    const vatControl = this.patientForm.get('vat');
+    this.patientForm.get('birthDate').valueChanges.subscribe((date) => {
+      if (!this.vatValidator(date)) {
+        vatControl.setValidators([Validators.required]);
+      } else {
+        vatControl.clearValidators();
+      }
+      vatControl.updateValueAndValidity();
+    });
+
+    if (patient.addresses) {
+      patient.addresses.forEach((address) => this.addOneMoreAddress(address))
+    } else {
+      this.addOneMoreAddress()
+    }
+  }
+
+  private addAdress(address: IAddress | any = {}) {
     return this.fb.group({
-      phoneNumber: ['', Validators.pattern(/^\+?[0-9\s]+$/g)],
-      street: [''],
-      city: [''],
-      zipcode: [''],
-      country: ['']
-    })
+      type : [this.addressTypes.find((type) => type.value === address.type)],
+      email  : [address.email, [Validators.required, Validators.email]],
+      phone  : [address.phone, [Validators.required, Validators.pattern(/^\+?[0-9\s]+$/g)]],
+      street : [address.street, Validators.required],
+      city   : [address.city, Validators.required],
+      zipcode: [address.zipcode, Validators.required],
+      country: [address.country, Validators.required]
+    });
   }
 
   private findInvalidControls(form): string[] {
@@ -108,7 +131,16 @@ export class PatientCardComponent implements OnInit {
 
     for (const name in controls) {
       if (controls[name].invalid) {
-        invalid.push(this.fieldNameToNormal(name));
+        if (name === 'addresses') {
+          controls[name].controls.forEach((addressControl) => {
+            for (const addressName in addressControl.controls)
+            if (addressControl.controls[addressName].invalid) {
+              invalid.push(this.fieldNameToNormal(addressName));
+            }
+          });
+        } else {
+          invalid.push(this.fieldNameToNormal(name));
+        }
       }
     }
 

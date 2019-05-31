@@ -1,7 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListOfPatientsPage } from './list-of-patients.page';
+import { ListOfPatientsPage }      from './list-of-patients.page';
+import { DateToLocalePipe }        from '../../shared/pipes/date-to-locale.pipe';
+import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { DataService }             from '../../services/data.service';
 
 describe('ListOfPatientsPage', () => {
   let component: ListOfPatientsPage;
@@ -9,7 +12,8 @@ describe('ListOfPatientsPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListOfPatientsPage ],
+      declarations: [ ListOfPatientsPage, DateToLocalePipe, PatientDetailsComponent ],
+      providers: [DataService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();

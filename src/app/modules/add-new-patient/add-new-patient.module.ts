@@ -1,14 +1,11 @@
 import { NgModule }                         from '@angular/core';
 import { CommonModule }                     from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule }             from '@angular/router';
 
-import { IonicModule }           from '@ionic/angular';
-import { IonicSelectableModule } from 'ionic-selectable';
-
+import { IonicModule }          from '@ionic/angular';
 import { AddNewPatientPage }    from './add-new-patient.page';
-import { PatientCardComponent } from '../../shared/components/patient-card/patient-card.component';
 import { DataService }          from '../../services/data.service';
+import { PatientCardModule }    from '../../shared/components/patient-card/patient-card-inputs.module';
 
 const routes: Routes = [
   {
@@ -20,13 +17,11 @@ const routes: Routes = [
 @NgModule({
   imports     : [
     CommonModule,
-    FormsModule,
     IonicModule,
-    ReactiveFormsModule,
-    IonicSelectableModule,
+    PatientCardModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddNewPatientPage, PatientCardComponent],
+  declarations: [AddNewPatientPage],
   providers   : [DataService]
 })
 export class AddNewPatientPageModule {

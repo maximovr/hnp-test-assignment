@@ -8,5 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <app-patient-card [isEditable]="true" (formEmitter)="fire($event)"></app-patient-card>
+  <app-patient-card [isEditable]="true"
+                    (formEmitter)="formSender($event)"></app-patient-card>
 </ion-content>

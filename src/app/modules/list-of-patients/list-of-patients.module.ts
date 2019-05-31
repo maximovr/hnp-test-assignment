@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule }                         from '@angular/core';
+import { CommonModule }                     from '@angular/common';
+import { Routes, RouterModule }             from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -9,6 +8,7 @@ import { ListOfPatientsPage }      from './list-of-patients.page';
 import { DataService }             from '../../services/data.service';
 import { DateToLocalePipe }        from '../../shared/pipes/date-to-locale.pipe';
 import { PatientDetailsComponent } from './patient-details/patient-details.component';
+import { PatientCardModule }       from '../../shared/components/patient-card/patient-card-inputs.module';
 
 const routes: Routes = [
   {
@@ -24,13 +24,13 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    PatientCardModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    ListOfPatientsPage,
     PatientDetailsComponent,
+    ListOfPatientsPage,
     DateToLocalePipe],
   providers: [DataService]
 })

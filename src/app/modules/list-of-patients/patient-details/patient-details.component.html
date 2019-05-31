@@ -9,6 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  import add user layout here
+<ion-content *ngIf="patient$ | async; let patient;">
+  <app-patient-card
+      [isEditable]="false"
+      [patient]="patient"></app-patient-card>
 </ion-content>
+
