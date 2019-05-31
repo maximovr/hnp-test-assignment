@@ -1,23 +1,28 @@
 <form [formGroup]="patientForm" (ngSubmit)="emitForm()">
+  <ion-item-divider class="address-header">
+    <ion-icon name="person" size="large" color="primary"></ion-icon>
+    <ion-label padding-start="5px">Personal information</ion-label>
+  </ion-item-divider>
+
   <ion-item>
     <ion-label position="stacked">First name *</ion-label>
     <ion-input name="firstName" id="firstName"
                type="text"
-               formControlName="firstName"></ion-input>
+               formControlName="firstName" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Last name *</ion-label>
     <ion-input name="lastName" id="lastName"
                type="text"
-               formControlName="lastName"></ion-input>
+               formControlName="lastName" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Birth date *</ion-label>
     <ion-datetime name="birthDate" id="birthDate"
                   type="date"
-                  formControlName="birthDate"></ion-datetime>
+                  formControlName="birthDate" [readonly]="!isEditable"></ion-datetime>
   </ion-item>
 
   <ion-item>
@@ -25,15 +30,14 @@
     </ion-label>
     <ion-input name="vat" id="vat"
                type="text"
-               formControlName="vat"></ion-input>
+               formControlName="vat" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Doctor *</ion-label>
-
     <ionic-selectable
         formControlName="doctor"
-        [items]="doctors$ | async"
+        [items]="doctors"
         itemValueField="id"
         itemTextField="fullName"
         [canSearch]="true"></ionic-selectable>
@@ -41,26 +45,43 @@
 
   <ion-item-group
       formArrayName="addresses"
-      *ngFor="let address of patientForm.controls['addresses'].controls; let i = index">
+      *ngFor="let address of patientForm['controls']['addresses']['controls']; let i = index">
     <ion-item-divider class="address-header">
-      <ion-label>{{numberToWord(i) | titlecase}} address</ion-label>
-
+      <ion-icon name="home" size="large" color="primary"></ion-icon>
+      <ion-label padding-start="5px">{{i === 0 ? 'Home' : (numberToWord(i) | titlecase)}} address</ion-label>
       <ion-fab-button size="small"
                       color="danger"
                       class="remove-address"
-                      *ngIf="i > 0"
-      (click)="removeAddress()">
+                      *ngIf="i > 0 && isEditable"
+                      (click)="removeAddress(i)">
         <ion-icon name="remove"></ion-icon>
       </ion-fab-button>
-
     </ion-item-divider>
+
     <ion-list [formGroupName]="i">
 
       <ion-item>
+        <ion-label position="stacked">Type *</ion-label>
+        <ionic-selectable
+            formControlName="type"
+            [items]="addressTypes"
+            itemValueField="value"
+            itemTextField="name"
+            [canSearch]="true"></ionic-selectable>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Email *</ion-label>
+        <ion-input [name]="'email-'+i" [id]="'email-'+i"
+                   type="text"
+                   formControlName="email" [readonly]="!isEditable"></ion-input>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="stacked">Phone number *</ion-label>
-        <ion-input [name]="'phoneNumber-'+i" [id]="'phoneNumber-'+i"
+        <ion-input [name]="'phone-'+i" [id]="'phone-'+i"
                    type="phone"
-                   formControlName="phoneNumber"></ion-input>
+                   formControlName="phone" [readonly]="!isEditable"></ion-input>
 
       </ion-item>
 
@@ -68,34 +89,36 @@
         <ion-label position="stacked">Street *</ion-label>
         <ion-input [name]="'street-'+i" [id]="'street-'+i"
                    type="text"
-                   formControlName="street"></ion-input>
+                   formControlName="street" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">City *</ion-label>
         <ion-input [name]="'city-'+i" [id]="'city-'+i"
                    type="text"
-                   formControlName="city"></ion-input>
+                   formControlName="city" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Zipcode *</ion-label>
         <ion-input [name]="'zipcode-'+i" [id]="'zipcode-'+i"
                    type="number"
-                   formControlName="zipcode"></ion-input>
+                   formControlName="zipcode" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Country *</ion-label>
         <ion-input [name]="'country-'+i" [id]="'country-'+i"
                    type="text"
-                   formControlName="country"></ion-input>
+                   formControlName="country" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
     </ion-list>
   </ion-item-group>
 
-  <ion-item-divider class="add-one-more-address" (click)="addOneMoreAddress()">
+  <ion-item-divider class="add-one-more-address"
+                    (click)="addOneMoreAddress()"
+                    *ngIf="isEditable">
     <ion-fab-button size="small">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -105,7 +128,9 @@
   <ion-button type="submit"
               color="primary"
               expand="full"
-              class="save-btn">
+              class="save-btn"
+              *ngIf="isEditable">
     Save
   </ion-button>
 </form>
+

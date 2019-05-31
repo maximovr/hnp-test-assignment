@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component }       from '@angular/core';
+import { Router }          from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { from }            from 'rxjs';
 
 @Component({
-  selector: 'app-add-new-patient',
+  selector   : 'app-add-new-patient',
   templateUrl: './add-new-patient.page.html',
-  styleUrls: ['./add-new-patient.page.scss'],
+  styleUrls  : ['./add-new-patient.page.scss']
 })
-export class AddNewPatientPage implements OnInit {
+export class AddNewPatientPage {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private router: Router,
+              private alertController: AlertController) {
   }
 
-  public fire(form) {
-    console.log(form);
+  public formSender(form) {
+    from(this.alertController.create({
+      header   : 'Success',
+      message  : 'New patient created',
+      buttons  : ['OK']
+    })).subscribe((x) => x.present() && this.router.navigate(['/list-of-patients']));
+    console.log('Form received and sent to backend', form);
   }
 
 }
