@@ -49,6 +49,7 @@ export const patients: IPatient[] = [
   {
     "id": 1,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -67,6 +68,7 @@ export const patients: IPatient[] = [
   {
     "id": 2,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -94,6 +96,7 @@ export const patients: IPatient[] = [
   {
     "id": 3,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -111,6 +114,7 @@ export const patients: IPatient[] = [
   },{
     "id": 4,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -129,6 +133,7 @@ export const patients: IPatient[] = [
   {
     "id": 5,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -156,6 +161,7 @@ export const patients: IPatient[] = [
   {
     "id": 6,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -173,6 +179,7 @@ export const patients: IPatient[] = [
   },{
     "id": 7,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -191,6 +198,7 @@ export const patients: IPatient[] = [
   {
     "id": 8,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -218,6 +226,7 @@ export const patients: IPatient[] = [
   {
     "id": 9,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -235,6 +244,7 @@ export const patients: IPatient[] = [
   },{
     "id": 10,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -253,6 +263,7 @@ export const patients: IPatient[] = [
   {
     "id": 11,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -280,6 +291,7 @@ export const patients: IPatient[] = [
   {
     "id": 12,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -297,6 +309,7 @@ export const patients: IPatient[] = [
   },{
     "id": 13,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -315,6 +328,7 @@ export const patients: IPatient[] = [
   {
     "id": 14,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -342,6 +356,7 @@ export const patients: IPatient[] = [
   {
     "id": 15,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -359,6 +374,7 @@ export const patients: IPatient[] = [
   },{
     "id": 16,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -377,6 +393,7 @@ export const patients: IPatient[] = [
   {
     "id": 17,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -404,6 +421,7 @@ export const patients: IPatient[] = [
   {
     "id": 18,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -421,6 +439,7 @@ export const patients: IPatient[] = [
   },{
     "id": 19,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -439,6 +458,7 @@ export const patients: IPatient[] = [
   {
     "id": 20,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -466,6 +486,7 @@ export const patients: IPatient[] = [
   {
     "id": 21,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -483,6 +504,7 @@ export const patients: IPatient[] = [
   },{
     "id": 22,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -501,6 +523,7 @@ export const patients: IPatient[] = [
   {
     "id": 23,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -528,6 +551,7 @@ export const patients: IPatient[] = [
   {
     "id": 24,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -545,6 +569,7 @@ export const patients: IPatient[] = [
   },{
     "id": 25,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -563,6 +588,7 @@ export const patients: IPatient[] = [
   {
     "id": 26,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -590,6 +616,7 @@ export const patients: IPatient[] = [
   {
     "id": 27,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -607,6 +634,7 @@ export const patients: IPatient[] = [
   },{
     "id": 28,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -625,6 +653,7 @@ export const patients: IPatient[] = [
   {
     "id": 29,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -652,6 +681,7 @@ export const patients: IPatient[] = [
   {
     "id": 30,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,
@@ -669,6 +699,7 @@ export const patients: IPatient[] = [
   },{
     "id": 31,
     "registeredDate": "2018-10-13T23:50:12Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Mario",
     "lastName": "Rossi",
     "doctor": 1,
@@ -687,6 +718,7 @@ export const patients: IPatient[] = [
   {
     "id": 32,
     "registeredDate": "2018-10-12T11:23:57Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Francesco",
     "lastName": "Giuliani",
     "doctor": 3,
@@ -714,6 +746,7 @@ export const patients: IPatient[] = [
   {
     "id": 33,
     "registeredDate": "2018-10-16T13:51:28Z",
+    "birthDate": "1987-10-13T23:50:12Z",
     "firstName": "Elico",
     "lastName": "Maikenberg",
     "doctor": 4,

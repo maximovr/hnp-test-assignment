@@ -15,6 +15,7 @@ NPM ~ 6.9.0
 Run `npm run start-lab` for ionic lab server. Navigate to `http://localhost:8200/`.
 
 ## Build
+For iOS build you should have xcode installed on your system, and android studio for android.<br/>
 Run `npm run build-ios` to build iOS package.<br/>
 Run `npm run build-android` to build apk for Android.
 
