@@ -11,6 +11,10 @@
 Node.js ~ 12.1.0 <br/>
 NPM ~ 6.9.0
 
+##Pre-requirements
+Ionic and Cordova should be installed globally:
+* npm i -g ionic cordova native-run
+
 ## Development server
 Run `npm run start-lab` for ionic lab server. Navigate to `http://localhost:8200/`.
 

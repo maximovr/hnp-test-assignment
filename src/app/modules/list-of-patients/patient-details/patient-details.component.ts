@@ -18,7 +18,7 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit() {
    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-    this.patient$ = this.dataService.getPatientById(id);
+   this.patient$ = this.dataService.getPatientById(id);
   }
 
 }

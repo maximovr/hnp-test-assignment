@@ -8,17 +8,17 @@ import {
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators
-}                             from '@angular/forms';
+} from '@angular/forms';
 import { AlertController }    from '@ionic/angular';
-import { from }   from 'rxjs';
+import { from }               from 'rxjs';
 import moment                 from 'moment';
 import numbertoWordsConverter from 'number-to-words';
 
 import { DataService }                 from '../../../services/data.service';
 import { IAddress, IDoctor, IPatient } from '../../interfaces';
-import { map }                         from 'rxjs/operators';
 
 @Component({
   selector   : 'app-patient-card',
@@ -27,7 +27,7 @@ import { map }                         from 'rxjs/operators';
 })
 export class PatientCardComponent implements OnInit {
   @Input() public isEditable: boolean;
-  @Input() public patient: IPatient | any = {};
+  @Input() public patient: IPatient | any         = {};
   @Output() public formEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   public doctors: IDoctor[];
@@ -37,7 +37,7 @@ export class PatientCardComponent implements OnInit {
     {name: 'Second home', value: 'SECOND_HOME'},
     {name: 'Work', value: 'WORK'},
     {name: 'Holiday place', value: 'HOLIDAY'},
-    {name: 'Close relative', value: 'RELATIVE'},
+    {name: 'Close relative', value: 'RELATIVE'}
   ];
 
   constructor(
@@ -48,12 +48,7 @@ export class PatientCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getAllDoctors().pipe(
-      map((doctors: IDoctor[]) => doctors.map((doctor: IDoctor) => {
-        doctor.fullName = `${doctor.firstName} ${doctor.lastName}`;
-        return doctor;
-      }))
-    ).subscribe((doctors) => {
+    this.dataService.getAllDoctors().subscribe((doctors) => {
       this.doctors = doctors;
       this.initPatientForm(this.patient);
     });
@@ -79,11 +74,22 @@ export class PatientCardComponent implements OnInit {
   }
 
   public addOneMoreAddress(address?: IAddress) {
-    (this.patientForm.controls['addresses'] as FormArray).push(this.addAdress(address));
+    (this.patientForm.controls.addresses as FormArray).push(this.addAdress(address));
   }
 
   public removeAddress(idx) {
-    (this.patientForm.controls['addresses'] as FormArray).removeAt(idx);
+    (this.patientForm.controls.addresses as FormArray).removeAt(idx);
+  }
+
+  public validatePhone(phone: FormControl) {
+    let phoneValue = phone.value.replace(/\s/g, '');
+
+    if (!/^\+/g.test(phone.value)) {
+      phoneValue = `+36 ${phoneValue}`;
+
+    }
+    phone.setValue(phoneValue);
+    phone.updateValueAndValidity();
   }
 
   private initPatientForm(patient: IPatient | any = {}) {
@@ -107,15 +113,15 @@ export class PatientCardComponent implements OnInit {
     });
 
     if (patient.addresses) {
-      patient.addresses.forEach((address) => this.addOneMoreAddress(address))
+      patient.addresses.forEach((address) => this.addOneMoreAddress(address));
     } else {
-      this.addOneMoreAddress()
+      this.addOneMoreAddress();
     }
   }
 
   private addAdress(address: IAddress | any = {}) {
     return this.fb.group({
-      type : [this.addressTypes.find((type) => type.value === address.type)],
+      type   : [this.addressTypes.find((type) => type.value === address.type)],
       email  : [address.email, [Validators.required, Validators.email]],
       phone  : [address.phone, [Validators.required, Validators.pattern(/^\+?[0-9\s]+$/g)]],
       street : [address.street, Validators.required],
@@ -133,9 +139,10 @@ export class PatientCardComponent implements OnInit {
       if (controls[name].invalid) {
         if (name === 'addresses') {
           controls[name].controls.forEach((addressControl) => {
-            for (const addressName in addressControl.controls)
-            if (addressControl.controls[addressName].invalid) {
-              invalid.push(this.fieldNameToNormal(addressName));
+            for (const addressName in addressControl.controls) {
+              if (addressControl.controls[addressName].invalid) {
+                invalid.push(this.fieldNameToNormal(addressName));
+              }
             }
           });
         } else {

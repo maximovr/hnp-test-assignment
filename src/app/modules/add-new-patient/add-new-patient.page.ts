@@ -5,8 +5,7 @@ import { from }            from 'rxjs';
 
 @Component({
   selector   : 'app-add-new-patient',
-  templateUrl: './add-new-patient.page.html',
-  styleUrls  : ['./add-new-patient.page.scss']
+  templateUrl: './add-new-patient.page.html'
 })
 export class AddNewPatientPage {
 

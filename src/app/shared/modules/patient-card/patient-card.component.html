@@ -1,40 +1,44 @@
-<form [formGroup]="patientForm" (ngSubmit)="emitForm()">
+<form [formGroup]="patientForm" (ngSubmit)="emitForm()" [ngClass]="{'isLocked': !isEditable}">
   <ion-item-divider class="address-header">
     <ion-icon name="person" size="large" color="primary"></ion-icon>
     <ion-label padding-start="5px">Personal information</ion-label>
   </ion-item-divider>
 
   <ion-item>
-    <ion-label position="stacked">First name *</ion-label>
+    <ion-label position="stacked">First name <span class="asterisk">*</span></ion-label>
     <ion-input name="firstName" id="firstName"
                type="text"
+               placeholder="ex.: John"
                formControlName="firstName" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Last name *</ion-label>
+    <ion-label position="stacked">Last name <span class="asterisk">*</span></ion-label>
     <ion-input name="lastName" id="lastName"
                type="text"
+               placeholder="ex.: Doe"
                formControlName="lastName" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Birth date *</ion-label>
+    <ion-label position="stacked">Birth date <span class="asterisk">*</span></ion-label>
     <ion-datetime name="birthDate" id="birthDate"
                   type="date"
+                  placeholder="ex.: 04/16/1987"
                   formControlName="birthDate" [readonly]="!isEditable"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">VAT <span *ngIf="patientForm.controls['vat'].invalid">*</span>
+    <ion-label position="stacked">VAT <span *ngIf="patientForm.controls['vat'].invalid" class="asterisk">*</span>
     </ion-label>
     <ion-input name="vat" id="vat"
                type="text"
+               placeholder="ex.: 123456789"
                formControlName="vat" [readonly]="!isEditable"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="stacked">Doctor *</ion-label>
+    <ion-label position="stacked">Doctor <span class="asterisk">*</span></ion-label>
     <ionic-selectable
         formControlName="doctor"
         [items]="doctors"
@@ -61,39 +65,43 @@
     <ion-list [formGroupName]="i">
 
       <ion-item>
-        <ion-label position="stacked">Type *</ion-label>
+        <ion-label position="stacked">Type <span class="asterisk">*</span></ion-label>
         <ionic-selectable
             formControlName="type"
             [items]="addressTypes"
             itemValueField="value"
             itemTextField="name"
-            [canSearch]="true"></ionic-selectable>
+            [canSearch]="true"
+            placeholder="ex: Home"></ionic-selectable>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Email *</ion-label>
+        <ion-label position="stacked">Email <span class="asterisk">*</span></ion-label>
         <ion-input [name]="'email-'+i" [id]="'email-'+i"
                    type="text"
+                   placeholder="ex.: jhon.doe@mygmail.com"
                    formControlName="email" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Phone number *</ion-label>
+        <ion-label position="stacked">Phone number <span class="asterisk">*</span></ion-label>
         <ion-input [name]="'phone-'+i" [id]="'phone-'+i"
                    type="phone"
+                   placeholder="ex.: +36 132 225 4444"
+                   (ionBlur)="validatePhone(address['controls']['phone'])"
                    formControlName="phone" [readonly]="!isEditable"></ion-input>
 
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Street *</ion-label>
+        <ion-label position="stacked">Street <span class="asterisk">*</span></ion-label>
         <ion-input [name]="'street-'+i" [id]="'street-'+i"
                    type="text"
                    formControlName="street" [readonly]="!isEditable"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">City *</ion-label>
+        <ion-label position="stacked">City <span class="asterisk">*</span></ion-label>
         <ion-input [name]="'city-'+i" [id]="'city-'+i"
                    type="text"
                    formControlName="city" [readonly]="!isEditable"></ion-input>
@@ -107,7 +115,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Country *</ion-label>
+        <ion-label position="stacked">Country <span class="asterisk">*</span></ion-label>
         <ion-input [name]="'country-'+i" [id]="'country-'+i"
                    type="text"
                    formControlName="country" [readonly]="!isEditable"></ion-input>
