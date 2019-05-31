@@ -12,4 +12,8 @@ export class AddNewPatientPage implements OnInit {
   ngOnInit() {
   }
 
+  public fire(form) {
+    console.log(form);
+  }
+
 }
