@@ -88,6 +88,10 @@ export class PatientCardComponent implements OnInit {
     (this.patientForm.controls['addresses'] as FormArray).push(this.addAdress());
   }
 
+  public removeAddress(idx) {
+    (this.patientForm.controls['addresses'] as FormArray).removeAt(idx);
+  }
+
   private addAdress() {
     return this.fb.group({
       phoneNumber: ['', Validators.pattern(/^\+?[0-9\s]+$/g)],

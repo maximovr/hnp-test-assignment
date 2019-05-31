@@ -43,7 +43,16 @@
       formArrayName="addresses"
       *ngFor="let address of patientForm.controls['addresses'].controls; let i = index">
     <ion-item-divider class="address-header">
-      <ion-label position="stacked">{{numberToWord(i) | titlecase}} address</ion-label>
+      <ion-label>{{numberToWord(i) | titlecase}} address</ion-label>
+
+      <ion-fab-button size="small"
+                      color="danger"
+                      class="remove-address"
+                      *ngIf="i > 0"
+      (click)="removeAddress()">
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+
     </ion-item-divider>
     <ion-list [formGroupName]="i">
 
@@ -87,17 +96,16 @@
   </ion-item-group>
 
   <ion-item-divider class="add-one-more-address" (click)="addOneMoreAddress()">
-    <ion-fab-button  size="small">
+    <ion-fab-button size="small">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-label>Add one more address</ion-label>
   </ion-item-divider>
 
-
   <ion-button type="submit"
               color="primary"
               expand="full"
-  class="save-btn">
+              class="save-btn">
     Save
   </ion-button>
 </form>
